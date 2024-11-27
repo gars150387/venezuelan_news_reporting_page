@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import { supabase } from "./supabaseConnection";
 import { Pagination } from "antd";
-import Banner from "./components/banner";
 import Navbar from "./components/Navbar";
 import NewsGrid from "./components/NewsGrid";
 import Footer from "./components/Footer";
+import Banner from "./components/Banner";
 
 // Fetch data from Supabase
 function useSupabaseData() {

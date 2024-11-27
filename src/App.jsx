@@ -96,38 +96,41 @@ function App() {
   useEffect(() => {
     const fetchFilteredNews = async () => {
       try {
-        // Check if searchTerm is empty
-        if (!searchTerm.trim()) {
+        // Trim the search term and check if it's not empty
+        const trimmedSearchTerm = searchTerm.trim();
+        if (!trimmedSearchTerm) {
           setRefetch(!refetch);
           setFilteredNews([]); // Optionally clear previous results
           return;
         }
-
-        // Perform the query
+  
+        // Perform the query using unaccent() for accent-insensitive matching
         const { data, error } = await supabase
           .from("noticia")
           .select("*")
-          .or(`title.ilike.%${searchTerm}%,content.ilike.%${searchTerm}%`)
+          .or(
+            `unaccent(title).ilike.%${trimmedSearchTerm}%,unaccent(content).ilike.%${trimmedSearchTerm}%`
+          )
           .order("inserted_at", { ascending: false });
-
+  
         // Handle errors
         if (error) {
           console.error("Error fetching data:", error);
           setFilteredNews([]); // Optionally clear results on error
           return;
         }
-
+  
         // Update state with fetched data
-        return setFilteredNews(data);
+        setFilteredNews(data);
       } catch (err) {
         console.error("Unexpected error:", err);
         setFilteredNews([]); // Optionally clear results on unexpected error
       }
     };
-
+  
     fetchFilteredNews();
   }, [searchTerm]);
-
+  
   useEffect(() => {
     if (sourceFilter === "All Sources") {
       return setRefetch(!refetch);

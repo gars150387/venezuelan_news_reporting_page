@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import NewsCard from "./newsCard";
+import NewsCard from "./NewsCard";
 
 export default function NewsGrid({ news }) {
   return (

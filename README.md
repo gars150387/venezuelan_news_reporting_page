@@ -127,7 +127,7 @@ This project is licensed under the [MIT License](LICENSE).
 ## 📧 **Contact**
 
 Have feedback or want to collaborate? Reach out at:
-- **Email**: infp@garssoftwaresolutions.com
+- **Email**: info@garssoftwaresolutions.com
 <!-- - **Twitter**: [@VenezNews](https://twitter.com/VenezNews) -->
 
 Let’s amplify the voices of Venezuela together! 🌟

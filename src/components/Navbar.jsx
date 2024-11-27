@@ -2,7 +2,6 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import { Filter, Search, Trash } from "lucide-react";
 import { useState } from "react";
-
 export default function Navbar({
   onSearch,
   onFilterChange,
@@ -12,7 +11,6 @@ export default function Navbar({
 }) {
   const [searchTerm, setSearchTerm] = useState("");
   const { scrollY } = useScroll();
-  console.log(scrollY);
   const opacity = useTransform(
     scrollY,
     [0, 0],

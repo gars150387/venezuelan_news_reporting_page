@@ -1,22 +1,13 @@
 /* eslint-disable react/prop-types */
 import { ExternalLink, Video, Newspaper } from "lucide-react";
+import "@justinribeiro/lite-youtube";
 import "../App.css";
 export default function NewsCard({ news }) {
   const videoId = news?.type === "video" ? news?.url?.split("v=")[1] : "";
   return (
     <article className="bg-white rounded-xl shadow-lg overflow-hidden transition-transform hover:scale-[1.02]">
       {news?.type === "video" && (
-        <iframe
-          title={news?.title}
-          width="100%"
-          height="100%"
-          src={`https://www.youtube.com/embed/${videoId}`}
-          frameBorder="0"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          style={{
-            backgroundImage: `url(https://img.youtube.com/vi/${videoId}/maxresdefault.jpg)`,
-          }}
-        ></iframe>
+        <lite-youtube videoid={videoId} title={news?.title}></lite-youtube>
       )}
       <div className="p-6 h-auto">
         <div className="flex items-center gap-2 mb-3">

@@ -108,7 +108,7 @@ function App() {
           .from("noticia")
           .select("*")
           .or(`title.ilike.%${searchTerm}%,content.ilike.%${searchTerm}%`)
-          .order("inserted_at", { ascending: false });
+          .order("inserted_at", { ascending: true });
 
         // Handle errors
         if (error) {
@@ -137,7 +137,7 @@ function App() {
         .from("noticia")
         .select("*")
         .ilike("owner", [`${sourceFilter}`])
-        .order("inserted_at", { ascending: false });
+        .order("inserted_at", { ascending: true });
       return setFilteredNews(data);
     };
     fetchData();

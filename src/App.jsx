@@ -107,7 +107,7 @@ function App() {
         const { data, error } = await supabase
           .from("noticia")
           .select("*")
-          .or(`title.ilike.%${searchTerm}%,content.ilike.%${searchTerm}%`)
+          .or(`title.ilike.%${searchTerm}%,content.ilike.%${searchTerm}%,owner.ilike.%${searchTerm}%,url.ilike.%${searchTerm}%,location.ilike.%${searchTerm}%,type.ilike.%${searchTerm}%`)
           .order("inserted_at", { ascending: true });
 
         // Handle errors

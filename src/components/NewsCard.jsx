@@ -47,7 +47,7 @@ export default function NewsCard({ news }) {
           rel="noopener noreferrer"
           className="w-fit flex justify-start items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
         >
-          Read More
+          Mas detalles
           <ExternalLink className="w-4 h-4" />
         </a>
       </div>

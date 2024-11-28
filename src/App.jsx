@@ -1,10 +1,10 @@
-import { useEffect, useState } from "react";
-import { supabase } from "./supabaseConnection";
 import { Pagination } from "antd";
+import { useEffect, useState } from "react";
+import Banner from "./components/Banner";
+import Footer from "./components/Footer";
 import Navbar from "./components/Navbar";
 import NewsGrid from "./components/NewsGrid";
-import Footer from "./components/Footer";
-import Banner from "./components/Banner";
+import { supabase } from "./supabaseConnection";
 
 // Fetch data from Supabase
 function useSupabaseData() {
@@ -87,7 +87,7 @@ function App() {
   useEffect(() => {
     const fetchData = async () => {
       const { data } = await supabase.from("noticia").select("owner");
-      const uniqueOwners = [...new Set(data.map((item) => item.owner))];
+      const uniqueOwners = [...new Set(data.map((item) => item.owner))].sort();
       return setOptions(uniqueOwners);
     };
     fetchData();

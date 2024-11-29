@@ -2,7 +2,12 @@ import { Newspaper } from "lucide-react";
 
 export default function Banner() {
   return (
-    <div className="bg-gradient-to-r from-yellow-300 via-blue-600 to-red-700 text-white py-16">
+    <div
+      style={{
+        backgroundImage:"radial-gradient(100% 100% at 50% 50%, black, transparent)",
+      }}
+      className="text-white py-16"
+    >
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-center space-x-4">
           <Newspaper className="w-12 h-12" />

@@ -6,8 +6,9 @@ export default function BannerVenezuelanAdjustmentLaw() {
   const aRef = useRef(null);
   const { scrollY } = useScroll();
 
-  const scale = useTransform(scrollY, [0, 120], [1, 0]);
-  const height = useTransform(scrollY, [0, 240], ["fit-content", 0]);
+  const scaleX = useTransform(scrollY, [0, 120], [1, 0]);
+  const height = useTransform(scrollY, [0, 230], ["fit-content", 0]);
+  const opacity = useTransform(scrollY, [0, 20], [1, 0]);
   const display = useTransform(scrollY, [0, 240], ["flex", "none"]);
   const fontSize = useTransform(scrollY, [0, 240], ["1.875rem", "1rem"]);
   const lineHeight = useTransform(scrollY, [0, 240], ["2.25rem", "1.25rem"]);
@@ -16,18 +17,14 @@ export default function BannerVenezuelanAdjustmentLaw() {
       <div className="container mx-auto py-0 px-4 my-0 sm:py-0 sm:px-0 sm:my-0">
         <motion.p
           style={{
-            scale,
+            opacity,
+            scaleX,
             height,
             display,
           }}
           transition={{
-            duration: 1,
+            duration: 0.5,
             delay: 0.5,
-          }}
-          initial={{
-            scale: 1,
-            height: "fit-content",
-            display: "flex",
           }}
           ref={textref}
           className="text-center mt-4 text-blue-800 text-xl font-bold drop-shadow-lg"
@@ -49,6 +46,7 @@ export default function BannerVenezuelanAdjustmentLaw() {
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
+            padding:"10px 0"
           }}
         
         >

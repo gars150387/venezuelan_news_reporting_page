@@ -87,7 +87,7 @@ function App() {
   useEffect(() => {
     const fetchData = async () => {
       const { data } = await supabase.from("noticia").select("owner");
-      const uniqueOwners = [...new Set(data.map((item) => item.owner))].sort();
+      const uniqueOwners = [...new Set(data.map((item) => String(item.owner).replaceAll("_"," ")))].sort((a,b) => a.localeCompare(b));
       return setOptions(uniqueOwners);
     };
     fetchData();

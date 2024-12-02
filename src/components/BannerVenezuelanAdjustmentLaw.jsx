@@ -10,7 +10,7 @@ export default function BannerVenezuelanAdjustmentLaw() {
   const height = useTransform(scrollY, [0, 230], ["fit-content", 0]);
   const opacity = useTransform(scrollY, [0, 20], [1, 0]);
   const display = useTransform(scrollY, [0, 240], ["flex", "none"]);
-  const fontSize = useTransform(scrollY, [0, 240], ["1.875rem", "1rem"]);
+  const fontSize = useTransform(scrollY, [0, 240], ["1.875rem", "1.15rem"]);
   const lineHeight = useTransform(scrollY, [0, 240], ["2.25rem", "1.25rem"]);
   return (
     <div className="w-full bg-gradient-to-b from-white to-transparent text-blue-800 shadow-md">
@@ -38,7 +38,7 @@ export default function BannerVenezuelanAdjustmentLaw() {
           href="https://leydeajustevenezolano.org/referidos-por-la-pagina-web/"
           target="_blank"
           rel="noreferrer"
-          className=" text-purple-950 underline decoration-current cursor-pointer underline-offset-2 text-balance px-0 hover:text-blue-800 my-4 sm:my-0"
+          className="font-bold tracking-widest text-purple-950 underline decoration-current cursor-pointer underline-offset-2 text-balance px-0 hover:text-blue-800 my-4 sm:my-0"
           style={{
             fontSize,
             lineHeight,
@@ -50,7 +50,7 @@ export default function BannerVenezuelanAdjustmentLaw() {
           }}
         
         >
-          Ley de ajuste venezolano.
+          Ley de ajuste venezolano en Estados Unidos
         </motion.a>{" "}
       </div>
     </div>

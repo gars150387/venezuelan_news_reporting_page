@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
-import { ExternalLink, Video, Newspaper } from "lucide-react";
 import "@justinribeiro/lite-youtube";
+import { Link, Newspaper, Video } from "lucide-react";
 import "../App.css";
 export default function NewsCard({ news }) {
   const videoId = news?.type === "video" ? news?.url?.split("v=")[1] : "";
@@ -27,7 +27,7 @@ export default function NewsCard({ news }) {
         <div className="flex flex-wrap gap-2 mb-4">
           <span
             key={news?.type}
-            className="px-3 py-1 rounded-full text-sm bg-gray-100 text-gray-600"
+            className="px-3 capitalize  py-1 rounded-full text-sm bg-gray-100 text-gray-600"
           >
             {news?.type}
           </span>
@@ -35,21 +35,30 @@ export default function NewsCard({ news }) {
         <div className="flex flex-wrap gap-2 mb-4">
           <span
             key={news?.owner}
-            className="px-3 py-1 rounded-full text-sm bg-gray-100 text-gray-600"
+            className="px-3 py-1 capitalize rounded-full text-sm bg-gray-100 text-gray-600"
           >
-            {news?.owner}
+            {String(news?.owner).replaceAll("_"," ")}
           </span>
         </div>
-
-        <a
-          href={news?.url}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="w-fit flex justify-start items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
-        >
-          Mas detalles
-          <ExternalLink className="w-4 h-4" />
-        </a>
+        <div className="w-full flex justify-between items-center">
+          <a
+            href={news?.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="w-fit flex justify-start items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+          >
+            Fuente original
+            <Link className="w-4 h-4" />
+          </a>
+          {/* <button
+          onClick={() => console.log("click")}             
+            type="button"
+            className="cursor-pointer w-fit flex justify-start items-center gap-2 px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors"
+          >
+            Mas detalles
+            <ExternalLink className="w-4 h-4" />
+          </button> */}
+        </div>
       </div>
     </article>
   );

@@ -1,23 +1,11 @@
 /* eslint-disable react/prop-types */
-import {
-  motion,
-  useMotionValueEvent,
-  useScroll,
-  useTransform,
-} from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { Filter, Search, Trash } from "lucide-react";
 import { useState } from "react";
 import BannerVenezuelanAdjustmentLaw from "./BannerVenezuelanAdjustmentLaw";
-export default function Navbar({
-  onSearch,
-  onFilterChange,
-  source,
-  refetch,
-  setRefetch,
-}) {
+export default function Navbar({ onSearch, onFilterChange, source, refetch }) {
   const [searchTerm, setSearchTerm] = useState("");
   const { scrollY } = useScroll();
-  useMotionValueEvent(scrollY, "change", (val) => console.log(val));
   const opacity = useTransform(scrollY, [0, 0], [0, 1]);
   const display = useTransform(scrollY, [0, 400], [0, 1]);
   return (
@@ -34,7 +22,7 @@ export default function Navbar({
     >
       <motion.div
         style={{
-          display:`${display < 1 ? "none" : "block"}`,
+          display: `${display < 1 ? "none" : "block"}`,
         }}
         className="container mx-auto my-3 px-4 rounded-xl"
       >
@@ -60,7 +48,8 @@ export default function Navbar({
               className="bg-transparent p-0 m-0 text-gray-400 hover:text-red-500"
               onClick={() => {
                 setSearchTerm("");
-                setRefetch(!refetch);
+                refetch();
+                onFilterChange("All Sources");
               }}
             >
               <Trash className="absolute right-3 top-2.5 text-gray-400 w-5 h-5 hover:transform hover:scale-110 hover:text-red-500" />
@@ -78,7 +67,9 @@ export default function Navbar({
               </option>
               {source?.map((src) => (
                 <option key={src} value={src} className="capitalize">
-                  {src.charAt(0).toUpperCase() + src.slice(1)}
+                  {String(src).startsWith === "@"
+                    ? src
+                    : String(src).replaceAll("_", " ")}
                 </option>
               ))}
             </select>

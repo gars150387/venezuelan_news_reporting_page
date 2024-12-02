@@ -77,7 +77,7 @@ export default function Navbar({
                 Todas las fuentes
               </option>
               {source?.map((src) => (
-                <option key={src} value={src}>
+                <option key={src} value={src} className="capitalize">
                   {src.charAt(0).toUpperCase() + src.slice(1)}
                 </option>
               ))}

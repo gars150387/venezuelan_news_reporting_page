@@ -26,8 +26,11 @@ export default function NewsCard({ news }) {
 
         <div className="flex flex-wrap gap-2 mb-4">
           <span
+            style={{
+              backgroundColor: news?.type === "video" ? "#ff6f6f" : "#f3f4f6",
+            }}
             key={news?.type}
-            className="px-3 capitalize  py-1 rounded-full text-sm bg-gray-100 text-gray-600"
+            className="px-3 capitalize py-1 rounded-full text-sm text-gray-600"
           >
             {news?.type}
           </span>
@@ -37,7 +40,7 @@ export default function NewsCard({ news }) {
             key={news?.owner}
             className="px-3 py-1 capitalize rounded-full text-sm bg-gray-100 text-gray-600"
           >
-            {String(news?.owner).replaceAll("_"," ")}
+            {String(news?.owner).replaceAll("_", " ")}
           </span>
         </div>
         <div className="w-full flex justify-between items-center">

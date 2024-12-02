@@ -7,52 +7,7 @@ import NewsGrid from "./components/NewsGrid";
 import { supabase } from "./supabaseConnection";
 import { useQuery } from "@tanstack/react-query";
 
-// Fetch data from Supabase
-// function useSupabaseData() {
-//   const [data, setData] = useState([]);
-//   const [loading, setLoading] = useState(true);
-//   const [refetch, setRefetch] = useState(false);
-//   const [error, setError] = useState(null);
-//   const [offset, setOffset] = useState(0); // Pagination offset
-//   const [limit, setLimit] = useState(12); // Items per page
-//   // Create an effect to fetch data when the component mounts
-
-//   useEffect(() => {
-//     const fetchData = async () => {
-//       try {
-//         const { data: news, error } = await supabase
-//           .from("noticia")
-//           .select("*")
-//           .range(offset, offset + limit - 1)
-//           .order("inserted_at", { ascending: false });
-//         if (error) {
-//           setError(error.message);
-//         } else {
-//           setData(news);
-//           setLoading(false);
-//         }
-//       } catch (error) {
-//         setError(error.message);
-//       }
-//     };
-//     fetchData();
-//   }, [offset, refetch]);
-//   // Return the fetched data and loading state
-//   return {
-//     data,
-//     loading,
-//     error,
-//     setOffset,
-//     offset,
-//     limit,
-//     refetch,
-//     setRefetch,
-//     setLimit,
-//   };
-// }
-
 function App() {
-  // const { refetch, setRefetch } = useSupabaseData();
   const [filteredNews, setFilteredNews] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [sourceFilter, setSourceFilter] = useState("All Sources");
@@ -101,7 +56,7 @@ function App() {
         .select("*")
         .ilike("owner", [`${sourceFilter}`])
         .order("inserted_at", { ascending: true }),
-    staleTime: 8 * 60 * 60 * 1000, //8hrs
+    staleTime: 1 * 60 * 60 * 1000, //8hrs
   });
 
   useEffect(() => {
@@ -216,7 +171,7 @@ function App() {
 
   const [current, setCurrent] = useState(1);
   const onChange = (page, pageSize) => {
-    setOffset(page + limit);
+    setOffset(page === 1 ? 0 : page * limit);
     setCurrent(page);
     setLimit(pageSize);
     rowData.refetch({

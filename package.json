@@ -12,6 +12,11 @@
   "dependencies": {
     "@justinribeiro/lite-youtube": "^1.6.0",
     "@supabase/supabase-js": "^2.46.1",
+    "@tanstack/query-async-storage-persister": "^5.62.0",
+    "@tanstack/query-sync-storage-persister": "^5.62.0",
+    "@tanstack/react-query": "^5.62.0",
+    "@tanstack/react-query-persist-client": "^5.62.0",
+    "@upstash/redis": "^1.34.3",
     "antd": "^5.22.2",
     "autoprefixer": "^10.4.20",
     "framer-motion": "^11.12.0",
@@ -21,6 +26,7 @@
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-infinite-scroll-component": "^6.1.0",
+    "react-router": "^7.0.1",
     "tailwindcss": "^3.4.15"
   },
   "devDependencies": {

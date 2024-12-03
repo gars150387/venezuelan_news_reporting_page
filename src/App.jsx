@@ -43,7 +43,7 @@ function App() {
         .or(
           `title.ilike.%${searchTerm}%,content.ilike.%${searchTerm}%,owner.ilike.%${searchTerm}%,url.ilike.%${searchTerm}%,location.ilike.%${searchTerm}%,type.ilike.%${searchTerm}%`
         )
-        .order("inserted_at", { ascending: true }),
+        .order("inserted_at", { ascending: false }),
     staleTime: 1 * 60 * 60 * 1000, //1hrs
     keepPreviousData: true,
   });
@@ -55,7 +55,7 @@ function App() {
         .from("noticia")
         .select("*")
         .ilike("owner", [`${sourceFilter}`])
-        .order("inserted_at", { ascending: true }),
+        .order("inserted_at", { ascending: false }),
     staleTime: 1 * 60 * 60 * 1000, //1hrs
   });
 
@@ -118,7 +118,7 @@ function App() {
                     )}%,url.ilike.%${searchTerm}%,location.ilike.%${searchTerm}%,type.ilike.%${searchTerm}%`
                   )
                   .range(offset, offset + limit - 1)
-                  .order("inserted_at", { ascending: true }),
+                  .order("inserted_at", { ascending: false }),
             });
             return setFilteredNews(result?.data?.data);
           };
@@ -160,7 +160,7 @@ function App() {
               .select("*")
               .ilike("owner", [`${sourceFilter}`])
               .range(offset, offset + limit - 1)
-              .order("inserted_at", { ascending: true }),
+              .order("inserted_at", { ascending: false }),
         });
         return setFilteredNews(result?.data?.data);
       };

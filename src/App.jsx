@@ -24,14 +24,14 @@ function App() {
         .select("*")
         .range(offset, offset + limit - 1)
         .order("inserted_at", { ascending: false }),
-    staleTime: 8 * 60 * 60 * 1000, //8hrs
+    staleTime: 1 * 60 * 60 * 1000, //1hrs
   });
 
   const countingRows = useQuery({
     queryKey: ["noticia"],
     queryFn: async () =>
       await supabase.from("noticia").select("inserted_at", { count: "exact" }),
-    staleTime: 8 * 60 * 60 * 1000, //8hrs
+    staleTime: 1 * 60 * 60 * 1000, //1hrs
   });
 
   const searchingRows = useQuery({
@@ -44,7 +44,7 @@ function App() {
           `title.ilike.%${searchTerm}%,content.ilike.%${searchTerm}%,owner.ilike.%${searchTerm}%,url.ilike.%${searchTerm}%,location.ilike.%${searchTerm}%,type.ilike.%${searchTerm}%`
         )
         .order("inserted_at", { ascending: true }),
-    staleTime: 8 * 60 * 60 * 1000, //8hrs
+    staleTime: 1 * 60 * 60 * 1000, //1hrs
     keepPreviousData: true,
   });
 
@@ -56,7 +56,7 @@ function App() {
         .select("*")
         .ilike("owner", [`${sourceFilter}`])
         .order("inserted_at", { ascending: true }),
-    staleTime: 1 * 60 * 60 * 1000, //8hrs
+    staleTime: 1 * 60 * 60 * 1000, //1hrs
   });
 
   useEffect(() => {
@@ -71,7 +71,7 @@ function App() {
     const controller = new AbortController();
     setTotalItems(countingRows?.data?.count);
     return () => controller.abort();
-  }, [countingRows.data]);
+  }, [countingRows.data, countingRows.isLoading, countingRows.error]);
 
   useEffect(() => {
     const fetchData = async () => {

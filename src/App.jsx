@@ -59,7 +59,10 @@ function App() {
         .limit(limit),
     staleTime: 1 * 60 * 60 * 1000, //1hrs
   });
-
+  useEffect(() => {
+    const cache = localStorage.getItem("REACT_QUERY_OFFLINE_CACHE");
+    if (cache) return localStorage.removeItem("REACT_QUERY_OFFLINE_CACHE");
+  }, []);
   useEffect(() => {
     const controller = new AbortController();
     if (rowData?.data?.data?.length > 0) {

@@ -1,8 +1,10 @@
 /* eslint-disable react/prop-types */
 import "@justinribeiro/lite-youtube";
 import { Link, Newspaper, Video } from "lucide-react";
+import { useNavigate } from "react-router";
 import "../App.css";
 export default function NewsCard({ news }) {
+  const navigate = useNavigate();
   const videoId = news?.type === "video" ? news?.url?.split("v=")[1] : "";
   return (
     <article className="bg-white rounded-xl shadow-lg overflow-hidden transition-transform hover:scale-[1.02]">
@@ -34,8 +36,6 @@ export default function NewsCard({ news }) {
           >
             {news?.type}
           </span>
-        </div>
-        <div className="flex flex-wrap gap-2 mb-4">
           <span
             key={news?.owner}
             className="px-3 py-1 capitalize rounded-full text-sm bg-gray-100 text-gray-600"
@@ -43,6 +43,14 @@ export default function NewsCard({ news }) {
             {String(news?.owner).replaceAll("_", " ")}
           </span>
         </div>
+        {/* <div className="flex flex-wrap gap-2 mb-4">
+          <span
+            key={news?.owner}
+            className="px-3 py-1 capitalize rounded-full text-sm bg-gray-100 text-gray-600"
+          >
+            {String(news?.owner).replaceAll("_", " ")}
+          </span>
+        </div> */}
         <div className="w-full flex justify-between items-center">
           <a
             href={news?.url}
@@ -53,14 +61,28 @@ export default function NewsCard({ news }) {
             Fuente original
             <Link className="w-4 h-4" />
           </a>
-          {/* <button
-          onClick={() => console.log("click")}             
+          <button
+            onClick={() =>
+              navigate(`/article/${news?.id}`, {
+                state: {
+                  article: {
+                    title: news?.title,
+                    author: news?.owner,
+                    content: news?.content,
+                    originalUrl: news?.url,
+                  },
+                },
+              })
+            }
             type="button"
-            className="cursor-pointer w-fit flex justify-start items-center gap-2 px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors"
+            style={{
+              display: news?.type === "video" ? "none" : "block",
+            }}
+            className="min-w-fit cursor-pointer w-fit flex justify-start items-center gap-2 px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors"
           >
             Mas detalles
-            <ExternalLink className="w-4 h-4" />
-          </button> */}
+            {/* <ExternalLink className="w-4 h-4" /> */}
+          </button>
         </div>
       </div>
     </article>

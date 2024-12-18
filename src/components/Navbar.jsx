@@ -57,7 +57,7 @@ export default function Navbar({ onSearch, onFilterChange, source, refetch }) {
           </div>
 
           <div className="w-full flex items-center gap-2 sm:w-1/2">
-            <Filter className="text-gray-600 w-5 h-5" />
+            <Filter className="hidden sm:flex text-gray-600 w-5 h-5" />
             <select
               onChange={(e) => onFilterChange(e.target.value)}
               className="w-full py-2 px-4 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent"

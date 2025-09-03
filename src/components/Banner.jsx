@@ -65,7 +65,7 @@ export default function Banner() {
         loop
         playsInline
       >
-        <source src="https://player.cloudinary.com/embed/?cloud_name=dyaqzwked&public_id=venezuela_presentation_-_Made_with_Clipchamp_e6sldl&profile=cld-default" type="video/mp4" />
+        <source src="https://res.cloudinary.com/dyaqzwked/video/upload/v1756906215/venezuela_presentation_-_Made_with_Clipchamp_e6sldl.mp4" type="video/mp4" />
         {/* Fallback background image */}
         <div 
           className="absolute inset-0 w-full h-full"

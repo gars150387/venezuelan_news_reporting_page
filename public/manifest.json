@@ -1,0 +1,33 @@
+{
+  "name": "Gustavo Rodriguez Santeliz - Noticias de Venezuela",
+  "short_name": "Noticias Venezuela",
+  "description": "Reportes de noticias y actualizaciones importantes sobre los eventos recientes en Venezuela",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#1f2937",
+  "orientation": "portrait-primary",
+  "scope": "/",
+  "lang": "es",
+  "categories": ["news", "information"],
+  "icons": [
+    {
+      "src": "/flag-for-flag-venezuela-svgrepo-com.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}

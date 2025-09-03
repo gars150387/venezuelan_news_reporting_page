@@ -1,29 +1,23 @@
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { StrictMode } from "react";
-import { createRoot } from "react-dom/client";
-import App from "./App.jsx";
-import "./index.css";
-// import { PersistQueryClientProvider } from "@tanstack/react-query-persist-client";
-// import { createSyncStoragePersister } from "@tanstack/query-sync-storage-persister";
+import { StrictMode } from 'react'
+import { createRoot } from 'react-dom/client'
+import './index.css'
+import App from './App.jsx'
 
-const queryClient = new QueryClient({
-  defaultOptions: {
-    queries: {
-      gcTime: 1000 * 60 * 60 * 1, // 1 hours
-    },
-  },
-});
+// Register service worker
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('/sw.js')
+      .then((registration) => {
+        console.log('SW registered: ', registration);
+      })
+      .catch((registrationError) => {
+        console.log('SW registration failed: ', registrationError);
+      });
+  });
+}
 
-// const persister = createSyncStoragePersister({
-//   storage: window.localStorage,
-// });
-
-createRoot(document.getElementById("root")).render(
+createRoot(document.getElementById('root')).render(
   <StrictMode>
-    {/* <PersistQueryClientProvider client={queryClient}> */}
-    <QueryClientProvider client={queryClient}>
-      <App />
-    </QueryClientProvider>
-    {/* </PersistQueryClientProvider> */}
-  </StrictMode>
-);
+    <App />
+  </StrictMode>,
+)

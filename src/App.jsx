@@ -1,20 +1,31 @@
 import { BrowserRouter, Route, Routes } from "react-router";
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import Home from "./components/Home";
 import { Main } from "./components/artricle/Main";
+import PWAInstallModal from "./components/PWAInstallModal";
+
+// Create a client
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      staleTime: 1 * 60 * 60 * 1000, // 1 hour
+      cacheTime: 5 * 60 * 60 * 1000, // 5 hours
+    },
+  },
+});
 
 function App() {
-  // const Main = lazy(() => import("./components/artricle/Main"));
   return (
-    <BrowserRouter>
-      {/* <Suspense fallback={<div>Loading...</div>}>
+    <QueryClientProvider client={queryClient}>
+      <BrowserRouter>
         <Routes>
-        </Routes>
-      </Suspense> */}
-      <Routes>
-        <Route path="/" element={<Home />} />
+          <Route path="/" element={<Home />} />
           <Route path="/article/:id" element={<Main />} />
-      </Routes>
-    </BrowserRouter>
+        </Routes>
+        <PWAInstallModal />
+      </BrowserRouter>
+    </QueryClientProvider>
   );
 }
+
 export default App;

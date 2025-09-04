@@ -19,18 +19,35 @@ self.addEventListener('install', (event) => {
   self.skipWaiting();
 });
 
-// Fetch event - serve from cache when offline
+// Fetch event - network first, then cache as backup
 self.addEventListener('fetch', (event) => {
   event.respondWith(
-    caches.match(event.request)
+    fetch(event.request)
       .then((response) => {
-        // Return cached version or fetch from network
-        return response || fetch(event.request).catch(() => {
-          // If both cache and network fail, return offline page
-          if (event.request.destination === 'document') {
-            return caches.match('/');
-          }
-        });
+        // If network request is successful, clone and cache the response
+        if (response && response.status === 200) {
+          const responseClone = response.clone();
+          caches.open(CACHE_NAME)
+            .then((cache) => {
+              cache.put(event.request, responseClone);
+            });
+        }
+        return response;
+      })
+      .catch(() => {
+        // Network failed, try to serve from cache
+        return caches.match(event.request)
+          .then((cachedResponse) => {
+            if (cachedResponse) {
+              return cachedResponse;
+            }
+            // If no cached version and it's a document request, return offline page
+            if (event.request.destination === 'document') {
+              return caches.match('/');
+            }
+            // For other resources, return a basic response or throw
+            throw new Error('No cached version available');
+          });
       })
   );
 });
